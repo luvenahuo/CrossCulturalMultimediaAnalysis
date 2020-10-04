@@ -1,0 +1,1 @@
+we used the previous versions of alphago and yet it was able to pull a much higher level to see using much more principled algorithms 

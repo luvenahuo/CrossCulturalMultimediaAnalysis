@@ -1,0 +1,99 @@
+body {
+  background-color: #fff;
+}
+
+#pf-timeline {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+#pf-timeline .popover {
+  white-space: pre;
+  max-width: none;
+}
+
+.info {
+  display: none;
+}
+
+.modal-dialog {
+  margin: 0;
+}
+
+.img-group{
+  max-width: 30%;
+  display: inline-block;
+}
+
+.text{
+  width: 70%;
+  text-align: left;
+  display: inline-block;
+  float: right;
+}
+
+
+.hover {
+  position: absolute;
+}
+
+text.timeline-pf-drop{
+  font-size: 32px;
+}
+
+text.timeline-pf-drop:hover {
+  font-size: 40px;
+  font-weight: 700;
+  paint-order: stroke;
+}
+
+.timeline-pf-marker,
+.timeline-pf-timestamp{
+  display: none !important;
+}
+
+.tt{
+  width: 250px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.125);
+    border-radius: .25rem;
+}
+
+.tt p {
+  margin: 5px;
+  display: inline;
+  font-size: 16px;
+  color: #fff;
+  display: inline;
+  float: left;
+  padding: .25em .4em;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25rem;
+  transition: color .15s
+}
+
+.clear{
+  clear: both;
+}
+
+.connectingLines {
+  position: absolute;
+  z-index: 1111;
+  height: 2px;
+  background-color: rgba(75, 75, 75, 1);
+}
+
+.separator {
+  stroke: grey;
+  stroke-width: 1px;
+}
+
+.modal-dialog {
+  margin: 0;
+}
