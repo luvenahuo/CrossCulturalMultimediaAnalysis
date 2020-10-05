@@ -1,4 +1,5 @@
 # CrossCulturalMultimediaAnalysis
 
 To run:
-python -m flask run
+* python3 -m pip install requirements.txt
+* python -m flask run
