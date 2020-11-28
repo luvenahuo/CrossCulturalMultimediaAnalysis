@@ -16,7 +16,7 @@ def index():
     dates = {'min':d[0], 'max':d[-1]}
 
     commit_data = [{"name": "United States", "data":[]}, 
-         {"name": "Common", "data":[]}, 
+         #{"name": "Common", "data":[]}, 
          {"name": "China", "data":[]}]
 
     commits = db.session.query(Commits, Affinity).outerjoin(Affinity, Affinity.id == Commits.affinity_id).all()
@@ -32,31 +32,30 @@ def index():
                 }}
             commit_data[0]["data"].append(data)
 
-            common = c.Commits.get_common().all()
-            for a in common:
-                print(a.id, a.common.all()[0].id)
-                commit_data[1]["data"].append({
-                    "date": a.common.all()[0].video_date.strftime(date_format),
-                    "details":{
-                        "isCommon": 1, 
-                        "name": a.common.all()[0].index,
-                        "common": a.index,
-                        "message": {
-                            "US": a.common.all()[0].message,
-                            "China": a.message
-                        }
-                    }
-                })
+            # common = c.Commits.get_common().all()
+            # for a in common:
+            #     print(a.id, a.common.all()[0].id)
+            #     commit_data[1]["data"].append({
+            #         "date": a.common.all()[0].video_date.strftime(date_format),
+            #         "details":{
+            #             "isCommon": 1, 
+            #             "name": a.common.all()[0].index,
+            #             "common": a.index,
+            #             "message": {
+            #                 "US": a.common.all()[0].message,
+            #                 "China": a.message
+            #             }
+            #         }
+            #     })
 
         elif c[1].name == 'China':
-            commit_data[2]["data"].append({
+            commit_data[1]["data"].append({
                 "date": c[0].video_date.strftime("%Y-%m-%d %H:%M:%S"),
                 "details":{
                     "name": c[0].index, "message": c[0].message, 
                 }})
     print(commit_data)
     return render_template('index.html', title=title, dates=dates, commits=commit_data)
-
 
 @app.route('/img/<i>', methods=['POST'])
 def img(i):
