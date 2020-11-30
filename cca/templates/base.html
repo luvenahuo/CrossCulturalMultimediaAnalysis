@@ -1,47 +1,28 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
     <head>
-        <!-- Required meta tags -->
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Cross Cultural News Event Difference</title>
         <script src="https://d3js.org/d3.v5.min.js"></script>
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Quantico&display=swap" rel="stylesheet">
-        <link type="text/css" rel="stylesheet" href="{{url_for('static', filename='style.css')}}"/>
-        {{ bootstrap.load_css() }}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/timeline.css')}}">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+        
     </head>
     <body class="bg-light">
         <main role="main" class="container">
-
-            <ul class="title">
-                <h1 class="text-center" id = "title">Cross Cultural Video News Difference</h1>
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-outline-info" id = "information" data-toggle="modal" data-target="#staticBackdrop">
-                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
-                        <circle cx="8" cy="4.5" r="1"/>
-                    </svg>
-
-                    Information
-                </button>
-            </ul>
-
-            {% include 'introdution.html' %}
-
+            
             {% block main%}{%endblock%}
-
-        </main>
+        
+        </main>   
 
         <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.11.0/js/bootstrap-select.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
-         {{ bootstrap.load_js() }}
         <script src="{{ url_for('static', filename='js/timeline.js')}}"></script>
         <script src="{{ url_for('static', filename='js/script.js')}}"></script>
+    
 
         <!--
             Copyright (c) 2014 marmelab
