@@ -173,7 +173,7 @@ function showImage(next){
 }
 
 function createLine(el1, el2){
-	var off1 =getElementProperty(el1);
+  var off1 =getElementProperty(el1);
   var off2 =getElementProperty(el2);
   // center of first point
   var dx1 = off1.left + off1.width;
