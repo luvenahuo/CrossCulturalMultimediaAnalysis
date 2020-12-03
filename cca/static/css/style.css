@@ -2,6 +2,46 @@ body {
   background-color: #fff;
 }
 
+@font-face{
+font-family: Proxima_Nova_Light;
+src: url('Proxima-Nova-Light.otf');
+}
+
+@font-face{
+font-family: Proxima_Nova;
+src: url('Proxima-Nova.otf');
+}
+
+.title {
+  padding-top: 20px;
+  display: flex;
+  flex-flow: row;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#title {
+  font-family: Quantico;
+}
+#information {
+  font-family: Proxima_Nova;
+}
+
+#info_popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#staticBackdropLabel\ information_title{
+  font-family: Proxima_Nova;
+}
+
+#information_content {
+  font-family: Proxima_Nova_Light;
+}
+
 #pf-timeline {
   width: 100%;
   margin-left: auto;
@@ -33,7 +73,6 @@ body {
   display: inline-block;
   float: right;
 }
-
 
 .hover {
   position: absolute;
