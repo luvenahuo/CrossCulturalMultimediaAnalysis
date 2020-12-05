@@ -24,7 +24,7 @@ var clicked = 0;
 console.log(json);
 for (var x in json) { //json lives in external file for testing
   data[x] = {};
-  console.log(json[x].name);
+  //console.log(json[x].name);
   data[x].name = json[x].name;
   data[x].data = [];
   for (var y in json[x].data) {
@@ -35,7 +35,6 @@ for (var x in json) { //json lives in external file for testing
   data[x].display = true;
 }
 
-
 var timeline = d3.chart.timeline()
   .end(end)
   .start(start)
@@ -43,8 +42,20 @@ var timeline = d3.chart.timeline()
   .maxScale(ONE_DAY/ONE_HOUR)
   .lineHeight(10)
   .contextHeight(50)
-  .marker(true)
+  // .axisFormat((axis) =>
+  //     axis.ticks(d3.timeDay.every(15)),
+  // )
+  .tickFormat([
+    [' ', (d) => d.getMilliseconds()],
+    [' ', (d) => d.getSeconds()],
+    [' ', (d) => d.getMinutes()],
+    [' ', (d) => d.getHours()],
+    ['%b %d', (d) => d.getMonth() && d.getDate()],
+    ['%b', (d) => d.getMonth()],
+    ['%Y', () => true]
+  ])
   .eventHover(function(el){
+    var attr = $(this).attr('hover')
     var tags = "";
     for (i in el.details.tags){
       tags += '<p class="badge badge-info">'+el.details.tags[i]+'</p>';
@@ -115,7 +126,17 @@ var timeline = d3.chart.timeline()
       $(this).attr('clicked', true);
     
     }
+  })
+  .eventShape('○')
+  .eventLineColor((d,i) => {
+      switch (i % 2) {
+        case 0:
+          return "#0088ce";
+        case 1:
+          return "#cc0000";
+      }
   });
+
 
 if(countNames(data) <= 0) {
   timeline.labelWidth(60);
