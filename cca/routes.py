@@ -54,7 +54,7 @@ def index():
                 "details":{
                     "name": c[0].index, "message": c[0].message, 
                 }})
-    print(commit_data)
+    #print(commit_data)
     return render_template('index.html', title=title, dates=dates, commits=commit_data)
 
 @app.route('/img/<i>', methods=['POST'])

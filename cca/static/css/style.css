@@ -88,9 +88,10 @@ text.timeline-pf-drop:hover {
   paint-order: stroke;
 }
 
+.timeline-pf-label,
 .timeline-pf-marker,
 .timeline-pf-timestamp{
-  display: none !important;
+  display: none;
 }
 
 .tt{
