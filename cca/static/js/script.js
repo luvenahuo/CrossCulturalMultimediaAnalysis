@@ -16,6 +16,8 @@ var data = [];
 var start = new Date(dates['min']);
 var end = new Date(dates['max']);
 
+//var current =
+
 start = addDays(start, -3);
 end = addDays(end, 3);
 var curImg = 0;
@@ -56,6 +58,7 @@ var timeline = d3.chart.timeline()
   ])
   .eventHover(function(el){
     var attr = $(this).attr('hover')
+    $(this).text('⬤');
     var tags = "";
     for (i in el.details.tags){
       tags += '<p class="badge badge-info">'+el.details.tags[i]+'</p>';
@@ -71,46 +74,36 @@ var timeline = d3.chart.timeline()
           $('.hover').empty();
         }
       );
-    }
+    };
+
+    $(this).mouseleave(function() {
+      var attr = $(this).attr('clicked');
+      if (attr === undefined)  $(this).text('◯');
+    });
+
   })
   .eventClick(function(el) {
-
+    $("text[connected = true]").text('◯');
+    $("text[connected = true]").removeAttr('connected');
+    $("text[clicked = true]").text('◯');
+    $("text[clicked = true]").removeAttr('clicked');
     var attr = $(this).attr('clicked');
+    $('#commonality').empty();
 
     if (attr !== undefined){
       $('.info').fadeTo("slow", 0);
       $('.info').css('display', 'none');
       $("text[fill='black']").removeAttr('fill');
-      $('#commonality').empty();
+      $(this).text('◯');
       $(this).removeAttr('clicked');
     } else {
-      $("text[fill='black']").removeAttr('fill');
-      $('#commonality').empty();
-
-      if(el.details.isCommon !== undefined && el.details.isCommon) {
-        var htm_txt = ''
-        for (i in el.details.message){
-          htm_txt += i + '<br>' + el.details.message[i] + '<hr>'
-        }
-        $('.text').html(htm_txt);
-        
-        var top_n = el.details.name;
-        var bottom_n = el.details.common;
-
-        var top = $("text[data-content*='Name: "+top_n+"<br>']").attr('fill', 'black');
-        var bottom = $("text[data-content*='Name: "+bottom_n+"']").attr('fill', 'black');
-        var middle = $("text[data-content*='Common: " + bottom_n + "<br>IsCommon:']").attr('fill', 'black');
-
-        var line1 = createLine(top,middle);
-        $('#commonality').append(line1);
-        var line2 = createLine(middle,bottom);
-        $('#commonality').append(line2);
-
-      } else {
-        $('.text').text(el.details.message);
+      $('.text').text(el.details.message);
+      if (el.details.isCommon === 0) {
+        $('#find_commonality').attr("disabled", "disabled");
       }
 
-      curImg = 0;   
+
+      curImg = 0;
       $.post('/img/'+ el.details.name).done(function(data){
         $('.imgs').empty();
         for( img in data){
@@ -120,14 +113,12 @@ var timeline = d3.chart.timeline()
         }
       });
       $('.info').fadeTo("slow", 1);
-      //$('.info').css('left', d3.event.pageX-10);
-      //$('.info').css('top', d3.event.pageY+20);
       $('.info').css('display', 'block');
       $(this).attr('clicked', true);
-    
+
     }
   })
-  .eventShape('○')
+  .eventShape('◯')
   .eventLineColor((d,i) => {
       switch (i % 2) {
         case 0:
@@ -167,15 +158,40 @@ function zoomFilter() {
 }
 
 
-$('.close').click(function(){
+$('.close').click(function(el){
+  $("text[connected = true]").text('◯');
+  $("text[connected = true]").removeAttr('connected');
+  $("text[clicked = true]").removeAttr('clicked');
   console.log("closed");
   $('.info').fadeTo("slow", 0);
   $('.info').css('display', 'none');
-  $("text[fill='black']").removeAttr('fill');
   $('#commonality').empty();
-  var clicked = $("text[clicked='true']").removeAttr('clicked');
-  console.log(clicked);
 });
+
+$('#find_commonality').click(function(){
+
+   $('#commonality').empty();
+
+   curr = $("text[clicked = true]");
+   isCommon = curr.attr('data-content').match(new RegExp("IsCommon: " + "(.*)" + "Message"))[1].replace('<br>','');
+   if (isCommon === '1'){
+     $('#find_commonality').popover('disable');
+     curr.attr('connected', true)
+
+     // Find the news that shares common
+     common_index = curr.attr('data-content').match(new RegExp("Common: " + "(.*)" + "IsCommon"))[1].replace('<br>','');
+     common = $("text[data-content*='Name: "+common_index+"<br>']")
+     common.text('⬤')
+     common.attr('connected', true)
+
+     var line1 = createLine(curr,common);
+     $('#commonality').append(line1);
+   } else {
+     $('#find_commonality').popover('enable');
+   }
+   $('#find_commonality').popover('disable');
+
+})
 
 function showImage(next){
 

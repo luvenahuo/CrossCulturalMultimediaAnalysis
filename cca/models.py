@@ -17,6 +17,7 @@ common = db.Table(
     db.Column('dest_id', db.Integer, db.ForeignKey('commits.id'))
 )
 
+
 class Commits(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     index = db.Column(db.String(8))
@@ -33,7 +34,7 @@ class Commits(db.Model):
 
     def __repr__(self):
         return '<Commits {} {} {}>'.format(self.id, self.index, self.affinity_id)
-    
+
     def add_common(self, commit):
         if not self.is_common(commit):
             self.commonality.append(commit)
@@ -43,12 +44,14 @@ class Commits(db.Model):
             common.c.src_id == commit.id).count() > 0
 
     def get_common(self):
-        commonality = Commits.query.join(common, (common.c.dest_id == Commits.id)).filter(common.c.src_id==self.id)
-        
-        return commonality
+        commonality_1 = Commits.query.join(common, (common.c.src_id == Commits.id)).filter(common.c.dest_id == self.id)
+        commonality_2 = Commits.query.join(common, (common.c.dest_id == Commits.id)).filter(common.c.src_id == self.id)
+
+        return commonality_1.union(commonality_2)
+
 
 class Tags(db.Model):
-    id =     id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
     tag = db.Column(db.String(140))
     commit_id = db.Column(db.Integer, db.ForeignKey('commits.id'))
     commit = db.relationship('Commits', backref=db.backref('tags', lazy=True))
@@ -56,13 +59,16 @@ class Tags(db.Model):
     def __repr__(self):
         return '<Tags {}>'.format(self.commit_id)
 
+
 class Images(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     path = db.Column(db.String(140))
     commit_id = db.Column(db.Integer, db.ForeignKey('commits.id'))
     commit = db.relationship('Commits', backref=db.backref('image', lazy=True))
+
     def __repr__(self):
         return '<Images {}>'.format(self.commit_id)
+
 
 class Affinity(db.Model):
     id = db.Column(db.Integer, primary_key=True)

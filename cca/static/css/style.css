@@ -23,8 +23,15 @@ src: url('Proxima-Nova.otf');
 #title {
   font-family: Quantico;
 }
-#information {
+
+.btn .btn-outline-info,
+#staticBackdropLabel information_title {
   font-family: Proxima_Nova;
+}
+
+#information_content,
+#credits {
+  font-family: Proxima_Nova_Light;
 }
 
 #info_popup {
@@ -32,14 +39,6 @@ src: url('Proxima-Nova.otf');
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-#staticBackdropLabel\ information_title{
-  font-family: Proxima_Nova;
-}
-
-#information_content {
-  font-family: Proxima_Nova_Light;
 }
 
 #pf-timeline {
