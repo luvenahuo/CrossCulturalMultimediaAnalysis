@@ -18,12 +18,13 @@
 <div class="info" role="dialog">
     <!--div class="modal-dialog w3-content w3-display-container shadow-lg" role="document"-->
     <div class="w3-content w3-display-container shadow-lg" role="document">
-        <div class="modal-content">
+        <div class="modal-content" id="data_point_info">
             <div class="modal-header">
                 <!--h5 class="modal-title">Video Title</h5-->
                 <p style="font-size: 20px;">Data Point</p>
-                <!-------COMMONALITY BUTTON - NOT IMPLEMENTED YET------->
-                <button type="button" class="btn btn-info" style="margin-left: 73%; height: 50%;">Show Commonality</button>
+                <button type="button" class="btn btn-outline-info" data-toggle="popover" data-placement="top"
+                        data-content="No commonality pairs associated with this news." id="find_commonality"
+                        style="margin-left: 73%; height: 50%;">Show Commonality</button>
                 <button type="button" class="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -41,10 +42,24 @@
                 <div class="p-1 text">content</div>
             </div>
         </div>
+        <div class="modal-content" id="similarity_pair">
+            <div class="modal-body">
+                <!----------COUNTRY STILL NEEDS TO BE MADE DYNAMIC---------->
+                <div style="font-size: 18px; margin-bottom: 18px;">United States</div>
+                <div class=img-group>
+                    <div class="p-1 imgs"></div>
+                    <div class="p-1 btn-group  btn-block">
+                        <button type="button" class="btn btn-outline-primary w3-button w3-black w3-display-left" onclick="showImage(-1)">&#10094;</button>
+                        <button type="button" class="btn btn-outline-primary w3-button w3-black w3-display-right" onclick="showImage(1)">&#10095;</button>
+                    </div>
+                </div>
+                <div class="p-1 text">content</div>
+            </div>
         </div>
+    </div>
 </div>
 
-<footer class="container mt-4">
+<footer class="container mt-4" id="credits">
     <div class="row">
         <p class="light">
         Imitation of 
