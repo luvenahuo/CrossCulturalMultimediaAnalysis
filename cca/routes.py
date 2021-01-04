@@ -5,7 +5,17 @@ from cca import app, db
 from cca.models import Commits, Images, Affinity, Tags
 import json
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
+def home():
+  return render_template("home.html")
+
+@app.route('/selectevent', methods = ['GET', 'POST'])
+def selectevent():
+  if request.method == "POST":
+    event = request.form['events']
+    return redirect("/index")
+  return redirect("/index")
+
 @app.route('/index', methods=['GET'])
 def index():
     date_format = '%Y-%m-%d %H:%M:%S'

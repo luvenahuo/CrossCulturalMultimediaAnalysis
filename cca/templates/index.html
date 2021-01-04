@@ -5,7 +5,12 @@
 <div id="commonality"></div>
 <div class="my-3 bg-white rounded shadow-sm card">
     <div class="card-header">
-        Ke jie vs. AlphaGo
+        <form action="/selectevent" method="POST">
+            <select class="alignleft" style="margin-left: 0px; height: 35px; width: 40%; border-radius: 20px;" name="events" id="events">
+                <option value="kejie_alphago">Ke Jie vs AlphaGo</option>
+            </select>
+            <input class="alignleft" type="submit" value="Select" style="margin-left: 1%; margin-right: 5px; border-radius: 10px; height: 35px;">
+        </form>
     </div>
     <div id="pf-timeline"></div>
 </div>
@@ -25,6 +30,8 @@
                 </button>
             </div>
             <div class="modal-body">
+                <!----------COUNTRY STILL NEEDS TO BE MADE DYNAMIC---------->
+                <div style="font-size: 18px; margin-bottom: 18px;">United States</div>
                 <div class=img-group>
                     <div class="p-1 imgs"></div>
                     <div class="p-1 btn-group  btn-block">
