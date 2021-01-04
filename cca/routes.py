@@ -11,7 +11,6 @@ def index():
     date_format = '%Y-%m-%d %H:%M:%S'
     commits = Commits.query.order_by(Commits.video_date).all()
     d = [c.video_date.strftime("%Y-%m-%d") for c in commits]
-    #print(d)
 
     title = 'CCA'
     dates = {'min':d[0], 'max':d[-1]}
@@ -48,12 +47,14 @@ def index():
             commit_data[0]["data"].append(data)
 
         elif c[1].name == 'China':
+            tags = Tags.query.filter_by(commit_id=c[0].id).all()
             similarity = c.Commits.get_common().all()
             if not similarity:
                 commit_data[1]["data"].append({
                     "date": c[0].video_date.strftime("%Y-%m-%d %H:%M:%S"),
                     "details": {
                         "name": c[0].index, "message": c[0].message,
+                        "tags": [t.tag for t in tags],
                         "isCommon": 0
                     }})
             else:
@@ -62,6 +63,7 @@ def index():
                             "date": c[0].video_date.strftime("%Y-%m-%d %H:%M:%S"),
                             "details": {
                                 "name": c[0].index, "message": c[0].message,
+                                "tags": [t.tag for t in tags],
                                 "isCommon": 1,
                                 "common": a.index,
                                 "other_message": a.message
